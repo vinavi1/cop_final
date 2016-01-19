@@ -38,12 +38,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         send = (Button) findViewById(R.id.send);
         send.setOnClickListener(this);
 
+        int falg1=0,flag2=0,flag3=0;
+
         entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (!checkEntryno(entry3.getText().toString())) {
+                    if (!checkEntryno(entry1.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry1 is invalid entry number", Toast.LENGTH_LONG).show();
+                        entry1.setError("INVALID ENTRY NUMBER-1");
+                    }
+                    else{
+                        entry1.setError(null);
                     }
                 }
             }
@@ -53,8 +59,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (!checkEntryno(entry3.getText().toString())) {
+                    if (!checkEntryno(entry2.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry2 is invalid entry number", Toast.LENGTH_LONG).show();
+                        entry2.setError("INVALID ENTRY NUMBER-2");
+                    } else{
+                        entry2.setError(null);
                     }
                 }
             }
@@ -66,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!hasFocus){
                     if (!checkEntryno(entry3.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry3 is invalid entry number", Toast.LENGTH_LONG).show();
+                        entry3.setError("INVALID ENTRY NUMBER-3");
+                    } else{
+                        entry3.setError(null);
                     }
                 }
             }
@@ -96,21 +108,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()){
             case R.id.send:
 
-                Intent intent = new Intent (this ,confirmation.class);
+                if(entry1.getError()==null&&entry2.getError()==null&&entry3.getError()==null){
+                    Intent intent = new Intent(this, confirmation.class);
 
-                intent.putExtra("Team-name",gtext(teamname));
-                intent.putExtra("user1", gtext(name1));
-                intent.putExtra("user2", gtext(name2));
-                intent.putExtra("user3", gtext(name3));
+                    intent.putExtra("Team-name", gtext(teamname));
+                    intent.putExtra("user1", gtext(name1));
+                    intent.putExtra("user2", gtext(name2));
+                    intent.putExtra("user3", gtext(name3));
 
-                intent.putExtra("entry1", gtext(entry1));
-                intent.putExtra("entry2", gtext(entry2));
-                intent.putExtra("entry3", gtext(entry3));
-                startActivity(intent);
+                    intent.putExtra("entry1", gtext(entry1));
+                    intent.putExtra("entry2", gtext(entry2));
+                    intent.putExtra("entry3", gtext(entry3));
+                    startActivity(intent);
 
-                break;
+                    break;
+                }
+                else{
+                    if(entry1.getError()!=null) {
+                        entry1.requestFocus();
+                    }
+                    else {
+                        if (entry2.getError()!=null){
+                            entry2.requestFocus();
+                        }
+                        else entry3.requestFocus();
+                    }
+                }
         }
     }
 
 }
-
