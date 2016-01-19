@@ -9,7 +9,6 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-
         android:id="@+id/LinearLayout01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -20,6 +19,8 @@
             android:id="@+id/Team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:singleLine="true"
             android:layout_margin="10dp"
             android:gravity="center"
             android:hint="TEAM"
@@ -27,10 +28,12 @@
 
         <EditText
             android:id="@+id/n1"
+            android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
+            android:singleLine="true"
             android:gravity="center"
             android:hint="NAME-1"></EditText>
 
@@ -40,11 +43,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
+            android:singleLine="true"
             android:gravity="center"
             android:hint="ENTRY NUMBER-1"></EditText>
 
         <EditText
             android:id="@+id/n2"
+            android:inputType="textPersonName"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -54,6 +60,7 @@
 
         <EditText
             android:id="@+id/e2"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -63,6 +70,8 @@
 
         <EditText
             android:id="@+id/n3"
+            android:inputType="textPersonName"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -72,6 +81,7 @@
 
         <EditText
             android:id="@+id/e3"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -83,12 +93,11 @@
 
     <Button
         android:id="@+id/send"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
-        android:text="send" />
+        android:text="Next" />
 </RelativeLayout>
 

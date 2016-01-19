@@ -3,16 +3,19 @@ package com.example.android.cop_final;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowId;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //hello world!
     Button send;
-    EditText tname;
+    EditText teamname;
     EditText name1;
     EditText entry1;
     EditText name2;
@@ -20,14 +23,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText name3;
     EditText entry3;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tname = (EditText) findViewById(R.id.Team);
+        teamname = (EditText) findViewById(R.id.Team);
         name1 = (EditText) findViewById (R.id.n1);
         entry1 = (EditText) findViewById(R.id.e1);
         name2 = (EditText) findViewById (R.id.n2);
@@ -36,16 +36,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entry3 = (EditText) findViewById(R.id.e3);
 
         send = (Button) findViewById(R.id.send);
-
         send.setOnClickListener(this);
 
+        entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (!checkEntryno(entry3.getText().toString())) {
+                        Toast.makeText(MainActivity.this, "entry1 is invalid entry number", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+        entry2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (!checkEntryno(entry3.getText().toString())) {
+                        Toast.makeText(MainActivity.this, "entry2 is invalid entry number", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+        entry3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if (!checkEntryno(entry3.getText().toString())) {
+                        Toast.makeText(MainActivity.this, "entry3 is invalid entry number", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+
+    public static boolean checkEntryno(String entryno) {
+
+        if(entryno.length()!=11){return false;}
+
+        int year = Integer.parseInt(entryno.substring(0, 4));
+        String dept = entryno.substring(4, 6);
+        String spec = entryno.substring(6,7);
+
+        if (year > 2014 || year < 2000) {return false;}
+        if (!dept.matches("CS") && !dept.matches("EE")) {return false;}
+        if (!spec.matches("1") && !spec.matches("5")) {return false;}
+
+        return true;
     }
 
     public static String gtext (EditText v) {
         String data =  v.getText().toString() ;
         return data;
     }
-
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -53,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent intent = new Intent (this ,confirmation.class);
 
-                intent.putExtra("Team-name",gtext(tname));
+                intent.putExtra("Team-name",gtext(teamname));
                 intent.putExtra("user1", gtext(name1));
                 intent.putExtra("user2", gtext(name2));
                 intent.putExtra("user3", gtext(name3));
@@ -64,12 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
 
                 break;
-
         }
     }
-
-
-
 
 }
 
