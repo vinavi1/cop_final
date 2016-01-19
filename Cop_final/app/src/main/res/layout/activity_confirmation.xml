@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:hint="TEAM"></TextView>
+            android:hint="TEAM NAME"></TextView>
 
         <TextView
             android:id="@+id/tn1"
