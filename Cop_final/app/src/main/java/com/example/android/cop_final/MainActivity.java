@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    //hello world!
     Button send;
     EditText tname;
     EditText name1;
