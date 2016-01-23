@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -31,11 +33,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText name3;
     EditText entry3;
     String[] data;
+    RadioButton mem3;
+    RadioGroup mem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mem     = (RadioGroup) findViewById(R.id.mem);
+        mem3    = (RadioButton) findViewById(R.id.mem3);
         teamname = (EditText) findViewById(R.id.Team);
         name1 = (EditText) findViewById(R.id.n1);
         entry1 = (EditText) findViewById(R.id.e1);
@@ -44,8 +50,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name3 = (EditText) findViewById(R.id.n3);
         entry3 = (EditText) findViewById(R.id.e3);
 
+        mem3.setChecked(true);
+
         send = (Button) findViewById(R.id.send);
         send.setOnClickListener(this);
+
+        mem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(!mem3.isChecked()){
+                    entry3.setVisibility(View.GONE);
+                    name3.setVisibility(View.GONE);
+                }
+                else{
+                    entry3.setVisibility(View.VISIBLE);
+                    name3.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

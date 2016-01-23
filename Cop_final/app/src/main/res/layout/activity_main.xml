@@ -13,11 +13,37 @@
         android:layout_height="wrap_content">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEAM of"
+                android:paddingTop="14dp"
+                android:textSize="40dp"
+                android:layout_gravity="center_horizontal"/>
+                <RadioGroup
+                    android:id="@+id/mem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+                    <RadioButton
+                        android:id="@+id/mem2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:paddingRight="40dp"/>
+                    <RadioButton
+                        android:id="@+id/mem3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:paddingRight="40dp"/>
+                </RadioGroup>
+
             <EditText
                 android:id="@+id/Team"
                 android:layout_width="match_parent"
@@ -31,7 +57,7 @@
                 android:hint="TEAM"
                 android:inputType="textCapCharacters"
                 android:textSize="40sp"
-                android:textColorHint="#000000"></EditText>
+                android:textColorHint="#8e9ae4"></EditText>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/n1_layout"
@@ -50,9 +76,7 @@
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:inputType="textCapCharacters"
-                    android:hint="NAME-1"
-                    android:textColor="#000000"
-                    android:textColorHint="#ff0000"></EditText>
+                    android:hint="NAME-1"></EditText>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -66,15 +90,14 @@
                 android:layout_height="wrap_content">
 
 
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                <AutoCompleteTextView
                     android:id="@+id/e1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
                     android:inputType="textCapCharacters"
-                    android:hint="ENTRY NUMBER-1"
-                    android:textColor="#8e9ae4"></android.support.v7.widget.AppCompatAutoCompleteTextView>
+                    android:hint="ENTRY NUMBER-1"></AutoCompleteTextView>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -95,8 +118,7 @@
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:inputType="textCapCharacters"
-                    android:hint="NAME-2"
-                    android:textColor="#8e9ae4"></EditText>
+                    android:hint="NAME-2"></EditText>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -111,15 +133,14 @@
                 android:layout_height="wrap_content">
 
 
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                <AutoCompleteTextView
                     android:id="@+id/e2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
                     android:inputType="textCapCharacters"
-                    android:hint="ENTRY NUMBER-2"
-                    android:textColor="#8e9ae4"></android.support.v7.widget.AppCompatAutoCompleteTextView>
+                    android:hint="ENTRY NUMBER-2"></AutoCompleteTextView>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -140,8 +161,7 @@
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:inputType="textCapCharacters"
-                    android:hint="NAME-3"
-                    android:textColor="#8e9ae4"></EditText>
+                    android:hint="NAME-3"></EditText>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -152,29 +172,32 @@
                 android:layout_marginRight="50dp"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                <AutoCompleteTextView
                     android:id="@+id/e3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
                     android:inputType="textCapCharacters"
-                    android:hint="ENTRY NUMBER-3"
-                    android:textColor="#8e9ae4"/>
+                    android:hint="ENTRY NUMBER-3"/>
 
             </android.support.design.widget.TextInputLayout>
 
 
             <Button
                 android:id="@+id/send"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="50dp"
                 android:text="send"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:textSize="20dp" />
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:textSize="20dp"
+                android:background="#d20e0eee"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"/>
+
         </LinearLayout>
     </RelativeLayout>
 
