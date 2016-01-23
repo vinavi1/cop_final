@@ -85,7 +85,7 @@ public class confirmation extends Activity implements View.OnClickListener{
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(confirmation.this,error.toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(confirmation.this,"No Network Connection",Toast.LENGTH_LONG).show();
                             }
                         }){
                     @Override
