@@ -7,9 +7,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowId;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,23 +30,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText entry2;
     EditText name3;
     EditText entry3;
+    String[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         teamname = (EditText) findViewById(R.id.Team);
-        name1 = (EditText) findViewById (R.id.n1);
+        name1 = (EditText) findViewById(R.id.n1);
         entry1 = (EditText) findViewById(R.id.e1);
-        name2 = (EditText) findViewById (R.id.n2);
+        name2 = (EditText) findViewById(R.id.n2);
         entry2 = (EditText) findViewById(R.id.e2);
-        name3 = (EditText) findViewById (R.id.n3);
+        name3 = (EditText) findViewById(R.id.n3);
         entry3 = (EditText) findViewById(R.id.e3);
 
         send = (Button) findViewById(R.id.send);
         send.setOnClickListener(this);
-
-        int falg1=0,flag2=0,flag3=0;
 
         entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -47,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (!checkEntryno(entry1.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry1 is invalid entry number", Toast.LENGTH_LONG).show();
                         entry1.setError("INVALID ENTRY NUMBER-1");
-                    }
-                    else{
+                    } else {
                         entry1.setError(null);
                     }
                 }
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (!checkEntryno(entry2.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry2 is invalid entry number", Toast.LENGTH_LONG).show();
                         entry2.setError("INVALID ENTRY NUMBER-2");
-                    } else{
+                    } else {
                         entry2.setError(null);
                     }
                 }
@@ -72,16 +78,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entry3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     if (!checkEntryno(entry3.getText().toString())) {
                         Toast.makeText(MainActivity.this, "entry3 is invalid entry number", Toast.LENGTH_LONG).show();
                         entry3.setError("INVALID ENTRY NUMBER-3");
-                    } else{
+                    } else {
                         entry3.setError(null);
                     }
                 }
             }
         });
+
+
+        BufferedReader br=null;
+        try {
+            List<String> list=new ArrayList<String>();
+            String line;
+            br=new BufferedReader(new InputStreamReader(getAssets().open("entrynumbers.txt")));
+            while((line=br.readLine())!=null){
+                String[] temp=new String[2];
+                temp=line.split(" ");
+                list.add(temp[0]);
+                list.add(temp[1]);
+            }
+            data=list.toArray(new String[list.size()]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try{
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>
+                (MainActivity.this,R.layout.support_simple_spinner_dropdown_item,data);
+        AutoCompleteTextView en1= (AutoCompleteTextView) findViewById(R.id.e1);
+        en1.setThreshold(1);
+        en1.setAdapter(arrayAdapter);
+        AutoCompleteTextView en2= (AutoCompleteTextView) findViewById(R.id.e2);
+        en2.setThreshold(1);
+        en2.setAdapter(arrayAdapter);
+        AutoCompleteTextView en3= (AutoCompleteTextView) findViewById(R.id.e3);
+        en3.setThreshold(1);
+        en3.setAdapter(arrayAdapter);
+
     }
 
     public static boolean checkEntryno(String entryno) {

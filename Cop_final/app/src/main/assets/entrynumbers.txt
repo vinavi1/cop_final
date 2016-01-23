@@ -1,0 +1,73 @@
+cs1140201 Aayan Kumar
+cs1140202 Abhijeet Anand
+cs1140203 Abhilash Ramteke
+cs1140204 Abhishek Sangwan
+cs1140205 Aditi
+cs1140206 Aditya Kumar
+cs1140207 Agrawal Prakhar Yogesh
+cs1140208 Ajmeera Nagaraju
+cs1140209 Aniket Ambar Bajpai
+cs1140210 Anil Kumar Meena
+cs1140211 Arkaprava Saha
+cs1140212 Aryan Garg
+cs1140213 Ayushya Raj
+cs1140214 Balivada Venkata Saikiranpatnaik
+cs1140215 Chada Nikhil Reddy
+cs1140216 Chennamadhava Rohan Raju
+cs1140217 Dhairya Sandhyana
+cs1140218 Divyansh
+cs1140219 Gangasani Sai Srimanth
+cs1140220 Gurtej Singh Sohi
+cs1140221 Harsh Arya
+cs1140222 Harshil R Meena
+cs1140223 Himanshu Singh
+cs1140224 Jarupla Rohit Naik
+cs1140225 Jatin Yadav
+cs1140226 Kalla Venkat Nikhil Kumar
+cs1140227 Karan Dwivedi
+cs1140228 Kiran Kumar Metta
+cs1140229 Kishalay Raj
+cs1140230 Kritarth
+cs1140231 Kshitij Choudhary
+cs1140232 Kushagra Madan
+cs1140233 Mayank Rajoria
+cs1140234 Mayank Sharan
+cs1140235 Mickle Gill
+cs1140236 Mohammad Akram Khan
+cs1140237 Mohit Bajaj
+cs1140238 Mukund Rungta
+cs1140239 Muppidi Sai Vivek Reddy
+cs1140240 Nagarajan Harish
+cs1140241 Neelapu Rajeev Srinu
+cs1140242 Neeraj Sabharwal
+cs1140243 Nethala Bilva Teja Bala Tataji Rao
+cs1140244 Nitin Rathor
+cs1140245 Pankaj Kumar
+cs1140246 Pragnesh Jogadiya
+cs1140247 Prashant Mittal
+cs1140248 Rahul Kumar
+cs1140249 Ranga Surendra
+cs1140250 Sachin
+cs1140251 Sarvesh Chandoliya
+cs1140252 Saurabh Kumar
+cs1140253 Shardul Tripathi
+cs1140254 Shristi Goyal
+cs1140255 Shubh Chaurasia
+cs1140256 Shubham Rathi
+cs1140257 Soudagar Afzal Shama
+cs1140258 Sourav Das
+cs1140259 Tantati Avinash
+cs1140260 Tuhinanksu Das
+cs1140261 Ujjwal Kumar
+cs1140262 Uppalam Venkata Mukesh Kumar
+cs1140263 Valluri Sri Ram
+cs1140264 Vikas Chouhan
+cs1140265 Vineeth Patibandla
+cs1140266 Vipparthy Sai Esvar
+cs1140267 Vishnu Bhalaki
+cs1140268 Waghmare Saurabh Milind
+cs1149001 Newfel Syed
+cs1149002 Febrice Kouaghu
+cs1149005 Jeremy Trudel
+cs1149007 Evita Stenquist
+cs1149008 Jacob Lonno
