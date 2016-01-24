@@ -2,4 +2,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="teamfont">40sp</dimen>
+    <dimen name="entryTopMargin">20dp</dimen>
+    <dimen name="nameTopMargin">5dp</dimen>
+    <dimen name="editNameMargin">10dp</dimen>
+    <dimen name="inputSideMargin">50dp</dimen>
+    <dimen name="ConfText">20sp</dimen>
+    <dimen name="ConfTextMargin">10dp</dimen>
 </resources>

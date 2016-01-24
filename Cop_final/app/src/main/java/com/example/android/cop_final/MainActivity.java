@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        
 
         BufferedReader br=null;
         try {
@@ -191,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AutoCompleteTextView en3= (AutoCompleteTextView) findViewById(R.id.e3);
         en3.setThreshold(1);
         en3.setAdapter(arrayAdapter);
-
     }
 
     public static boolean checkEntryno(String entryno) {
@@ -202,11 +202,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String dept = entryno.substring(4, 6);
         String spec = entryno.substring(6,7);
 
-        if (year > 2014 || year < 2000) {return false;}
-        if (!dept.matches("CS") && !dept.matches("EE")) {return false;}
-        if (!spec.matches("1") && !spec.matches("5")) {return false;}
-
-        return true;
+        if (year > 2014 || year < 2005) {return false;}
+        if ((dept.matches("CS")&&(spec.matches("1")||spec.matches("5")))){return true;}
+        if((dept.matches("CE")&&(spec.matches("1")))){return true;}
+        if((dept.matches("CH")&&(spec.matches("1")||spec.matches("5")||spec.matches("3")))){return true;}
+        if((dept.matches("BB")&&(spec.matches("1")||spec.matches("5")))){return true;}
+        if((dept.matches("EE")&&(spec.matches("1")||spec.matches("3")||spec.matches("5")))){return true;}
+        if((dept.matches("PH")&&(spec.matches("1")))){return true;}
+        if((dept.matches("MT")&&(spec.matches("1")||spec.matches("5")||spec.matches("6")))){return true;}
+        if((dept.matches("ME")&&(spec.matches("1")||spec.matches("2")))){return true;}
+        return false;
     }
 
     public static String gtext (EditText v) {
@@ -217,8 +222,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.send:
-
-                if(entry1.getError()==null&&entry2.getError()==null&&entry3.getError()==null && name1.getError()==null&&name2.getError()==null&&name3.getError()==null ){
+                boolean en1val=checkEntryno(gtext(entry1));
+                boolean en3val=checkEntryno(gtext(entry2));
+                boolean en2val=checkEntryno(gtext(entry3));
+                if(en1val&&en2val&&en3val){
                     Intent intent = new Intent(this, confirmation.class);
 
                     intent.putExtra("Team-name", gtext(teamname));
@@ -234,11 +241,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
                 else{
-                    if(!checkEntryno(entry1.getText().toString().toUpperCase())) {
+                    if(!en1val) {
                         entry1.requestFocus();
                     }
                     else {
-                        if (!checkEntryno(entry1.getText().toString().toUpperCase())){
+                        if (en2val){
                             entry2.requestFocus();
                         }
                         else entry3.requestFocus();

@@ -28,73 +28,71 @@
                 android:textSize="60sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
 
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
             <TextView
                 android:id="@+id/tn1"
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
             <TextView
                 android:id="@+id/te1"
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
 
             <TextView
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:id="@+id/tn2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
             <TextView
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:id="@+id/te2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
             <TextView
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:id="@+id/tn3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
+                android:textColor="@color/ConfmTextColor"></TextView>
 
             <TextView
-                android:textSize="20sp"
+                android:textSize="@dimen/ConfText"
                 android:id="@+id/te3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ConfTextMargin"
                 android:gravity="center"
-                android:textColor="#000000"></TextView>
-
-
+                android:textColor="@color/ConfmTextColor"></TextView>
 
         </LinearLayout>
 
@@ -119,8 +117,5 @@
                 android:textColor="#000000" />
 
         </LinearLayout>
-
-
-
     </LinearLayout>
 </ScrollView>

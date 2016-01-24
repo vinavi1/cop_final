@@ -5,9 +5,7 @@
     android:layout_height="fill_parent"
     android:fillViewport="false"
     android:background="#c4195fd9">
-
-
-
+    
     <RelativeLayout
         android:id="@+id/LinearLayout01"
         android:layout_width="wrap_content"
@@ -19,15 +17,14 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tname_layout"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
-
+                android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/Team"
@@ -37,7 +34,7 @@
                 android:singleLine="true"
                 android:hint="TEAM-NAME"
                 android:inputType="textCapCharacters"
-                android:textSize="40sp"></EditText>
+                android:textSize="@dimen/teamfont"></EditText>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -45,13 +42,11 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/e1_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-
+                android:layout_marginTop="@dimen/entryTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
                 android:layout_height="wrap_content"
-                android:background="#dddcea">
-
+                android:baselineAligned="false">
 
                 <AutoCompleteTextView
                     android:id="@+id/e1"
@@ -68,18 +63,17 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/n1_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
+                android:layout_marginTop="@dimen/nameTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/n1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/editNameMargin"
                     android:inputType="textCapCharacters"
                     android:hint="NAME-1"></EditText>
 
@@ -89,13 +83,10 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/e2_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
-
+                android:layout_marginTop="@dimen/entryTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
+                android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
                     android:id="@+id/e2"
@@ -108,37 +99,34 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/n2_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
+                android:layout_marginTop="@dimen/nameTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/n2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/editNameMargin"
                     android:inputType="textCapCharacters"
                     android:hint="NAME-2"></EditText>
 
             </android.support.design.widget.TextInputLayout>
 
 
-
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/e3_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
+                android:layout_marginTop="@dimen/entryTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
+                android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
                     android:id="@+id/e3"
@@ -151,27 +139,25 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/n3_layout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_height="wrap_content"
-                android:background="#dddcea">
+                android:layout_marginTop="@dimen/nameTopMargin"
+                android:layout_marginLeft="@dimen/inputSideMargin"
+                android:layout_marginRight="@dimen/inputSideMargin"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/n3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/editNameMargin"
                     android:inputType="textCapCharacters"
                     android:hint="NAME-3"></EditText>
 
             </android.support.design.widget.TextInputLayout>
-
-
 
 
             <Button
@@ -192,8 +178,4 @@
 
         </LinearLayout>
     </RelativeLayout>
-
-
-
-
 </ScrollView>
