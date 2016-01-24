@@ -78,16 +78,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name3.setVisibility(View.VISIBLE);
         }
 
-
+        /*this method is used to check for the validity of the entry number
+        entered and displaying the error in case it is wrong and
+         also getting the name corresponding to the entry number and the entryfocus here is only for the edittext
+        corresponding to entry numbers*/
         View.OnFocusChangeListener entryfocus = null;
         entryfocus=new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
+                    //temp is a temporary object to get the view which calls this method
                     EditText temp= (EditText) findViewById(v.getId());
                     if (!CheckEntryNumber.checkEntryno(gtext(temp))) {
                         temp.setError("invalid entry");
                     } else {
+                            /*refer is the hashTable which contais entry numbers as the key and names as the values
+                            * if there is no such key we don't suggest any name to the name blank*/
                         temp.setError(null);
                         if(v.getId()==entry1.getId()){
                             if (refer.containsKey(entry1.getText().toString().toUpperCase())){
@@ -109,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
+        /*this is to check if the name is left empty and display error if it left empty
+        * activated each time the focus of it changes*/
         View.OnFocusChangeListener namefocus = null;
         namefocus=new View.OnFocusChangeListener() {
             @Override
@@ -123,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
+        /*setting the focus listeners to the corresponding editTexts depending on name or entry number*/
         teamname.setOnFocusChangeListener(namefocus);
         entry1.setOnFocusChangeListener(entryfocus);
         name1.setOnFocusChangeListener(namefocus);
@@ -131,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entry3.setOnFocusChangeListener(entryfocus);
         name3.setOnFocusChangeListener(namefocus);
 
+        /*reading the text file from the assets into an hashtable and an array for drop down menu
+        * and for suggesting names*/
         BufferedReader br=null;
         try {
             List<String> list=new ArrayList<String>();
@@ -155,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        /*creating an array adpater using the
+        array created previously from the text file and setting the array adapter to the autocomplete textview */
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>
                 (MainActivity.this,R.layout.support_simple_spinner_dropdown_item,data);
         AutoCompleteTextView en1= (AutoCompleteTextView) findViewById(R.id.e1);
@@ -168,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         en3.setAdapter(arrayAdapter);
     }
 
+    //gtext is function which takes an edit text and gets the string enteres in the edit text
     public static String gtext (EditText v) {
         String data =  v.getText().toString() ;
         return data;
@@ -176,9 +190,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.send:
-
-
-
+                /*checking if the number of memebers are 2 or 3 and accordingly setting the
+                * intent that is being transfered and ignoring the empty spaces in the entry3 and name3
+                * if the number of members selected is 3*/
                 if(!check.equals("mem2")) {
                     boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
                     boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
@@ -187,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(!(teamname.getText().toString().isEmpty())&&en1val&&en2val&&en3val&&!(name1.getText().toString().isEmpty())&&!(name2.getText().toString().isEmpty())&&!(name3.getText().toString().isEmpty())){
                         Intent intent = new Intent(this, confirmation.class);
 
-                        intent.putExtra("Team-name", gtext(teamname));
+                        intent.putExtra("Team-name", gtext(teamname));  //passing the intent to the next activity
                         intent.putExtra("user1", gtext(name1));
                         intent.putExtra("user2", gtext(name2));
                         intent.putExtra("user3", gtext(name3));
@@ -199,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         break;
                     }
-                    else{
+                    else{       //if any entry is wrong requesting focus to the first mistake
                         if(!en1val) {
                             entry1.requestFocus();
                         }
@@ -213,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 }
-                else {
+                else {              //same as for 3 members only that we send the entry3 and name3 intent as null
                     boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
                     boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
 
@@ -239,9 +253,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         else {
                             if(!en2val){
                                 entry2.requestFocus();
-                            }
-                            else{
-                                entry3.requestFocus();
                             }
                         }
                     }

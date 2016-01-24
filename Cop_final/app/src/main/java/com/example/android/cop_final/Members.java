@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class Members extends AppCompatActivity {
 
+    //declaring image buttons for choosing 2 or 3 for team
     ImageButton mem2;
     ImageButton mem3;
 
@@ -22,9 +23,9 @@ public class Members extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_members);
         addListenerOnButton();
-
     }
 
+    
     public void addListenerOnButton() {
 
         mem2 = (ImageButton) findViewById(R.id.mem2);

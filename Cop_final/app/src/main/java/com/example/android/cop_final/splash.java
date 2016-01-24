@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-
+//setting the time for splash and splash activity
 public class splash extends  Activity{
     private int time=2500;
 

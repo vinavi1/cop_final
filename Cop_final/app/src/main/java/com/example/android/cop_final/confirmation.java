@@ -24,12 +24,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-// final activity which corresponds to the details entered 
+// final activity which corresponds to the details entered
+
 public class confirmation extends Activity implements View.OnClickListener{
 
+
+    // requestQueue declaration
     RequestQueue requestQueue;
 
-
+    // views declaration
     Button confirm;
     TextView team;
     TextView tn1;
@@ -44,6 +47,7 @@ public class confirmation extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
+        // new requestQueue initialized
         requestQueue = Volley.newRequestQueue(this);
         team = (TextView) findViewById(R.id.tTeam);
         tn1 = (TextView) findViewById(R.id.tn1);
@@ -52,12 +56,15 @@ public class confirmation extends Activity implements View.OnClickListener{
         te1 = (TextView) findViewById(R.id.te1);
         te2 = (TextView) findViewById(R.id.te2);
         te3 = (TextView) findViewById(R.id.te3);
-
         confirm = (Button) findViewById(R.id.confirm);
 
+        // makes confirm button wait for clicks
         confirm.setOnClickListener(this);
+
+        // receives intent from MainActivity
         Intent intent = getIntent();
 
+        // sets all the texts in the textviews using data from intent
         if(null != intent) {
             team.setText(intent.getStringExtra("Team-name"));
             tn1.setText(intent.getStringExtra("user1"));
@@ -71,25 +78,29 @@ public class confirmation extends Activity implements View.OnClickListener{
 
 
     }
-
+    // called on clicking
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.confirm:
-
+                //new StringRequest intialization
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://agni.iitd.ernet.in/cop290/assign0/register/",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(confirmation.this,response,Toast.LENGTH_LONG).show();
+                                Toast.makeText(confirmation.this,response,Toast.LENGTH_LONG).show();   //shows the response as a toast
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(confirmation.this,"No Network Connection",Toast.LENGTH_LONG).show();
-                            }
+                            }                                                                          //if error then shows the given message as a toast
                         }){
+
+                    /* returns a hashmap which is to be posted to the URL
+                       maps the Strings with their corresponding values
+                      */
                     @Override
                     protected Map<String,String> getParams(){
                         Map<String,String> params = new HashMap<String, String>();
@@ -105,6 +116,8 @@ public class confirmation extends Activity implements View.OnClickListener{
                     }
 
                 };
+
+                // adding the Stringrequest to RequestQueue
 
                 RequestQueue requestQueue = Volley.newRequestQueue(this);
                 requestQueue.add(stringRequest);
