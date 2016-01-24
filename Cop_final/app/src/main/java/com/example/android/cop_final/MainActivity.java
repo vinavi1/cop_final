@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -33,15 +34,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText name3;
     EditText entry3;
     String[] data;
-    RadioButton mem3;
-    RadioGroup mem;
+    String[] datan;
+    HashMap<String,String> refer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mem     = (RadioGroup) findViewById(R.id.mem);
-        mem3    = (RadioButton) findViewById(R.id.mem3);
+
+        refer = new HashMap<>();
+
         teamname = (EditText) findViewById(R.id.Team);
         name1 = (EditText) findViewById(R.id.n1);
         entry1 = (EditText) findViewById(R.id.e1);
@@ -50,15 +53,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name3 = (EditText) findViewById(R.id.n3);
         entry3 = (EditText) findViewById(R.id.e3);
 
-        mem3.setChecked(true);
+
 
         send = (Button) findViewById(R.id.send);
         send.setOnClickListener(this);
 
-        mem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(!mem3.isChecked()){
+        Intent intent3 = getIntent();
+
+        String check = intent3.getStringExtra("bool");
+
+                if(check.equals("mem2")){
                     entry3.setVisibility(View.GONE);
                     name3.setVisibility(View.GONE);
                 }
@@ -66,19 +70,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     entry3.setVisibility(View.VISIBLE);
                     name3.setVisibility(View.VISIBLE);
                 }
+
+        name1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (name1.getText().toString().isEmpty()) {
+                        name1.setError("must not be empty");
+                    } else {
+                        name1.setError(null);
+                    }
+                }
             }
         });
-
 
         entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (!checkEntryno(entry1.getText().toString())) {
-                        Toast.makeText(MainActivity.this, "entry1 is invalid entry number", Toast.LENGTH_LONG).show();
-                        entry1.setError("INVALID ENTRY NUMBER-1");
+                    if (!checkEntryno(entry1.getText().toString().toUpperCase())) {
+                        Toast.makeText(MainActivity.this, "entrynumber-1 is invalid", Toast.LENGTH_LONG).show();
+                        entry1.setError("invalid entry");
                     } else {
                         entry1.setError(null);
+                        if (refer.containsKey(entry1.getText().toString().toUpperCase())){
+                            name1.setText(refer.get(entry1.getText().toString().toUpperCase()));
+                        }
+                    }
+                }
+            }
+        });
+
+        name2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (name2.getText().toString().isEmpty()) {
+                        name2.setError("must not be empty");
+                    } else {
+                        name2.setError(null);
                     }
                 }
             }
@@ -88,11 +118,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (!checkEntryno(entry2.getText().toString())) {
-                        Toast.makeText(MainActivity.this, "entry2 is invalid entry number", Toast.LENGTH_LONG).show();
-                        entry2.setError("INVALID ENTRY NUMBER-2");
+                    if (!checkEntryno(entry2.getText().toString().toUpperCase())) {
+                        Toast.makeText(MainActivity.this, "entrynumber-2 is invalid", Toast.LENGTH_LONG).show();
+                        entry2.setError("invalid entry");
                     } else {
                         entry2.setError(null);
+                    }
+                }
+            }
+        });
+
+        name3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (name3.getText().toString().isEmpty()) {
+                        name3.setError("must not be empty");
+                    } else {
+                        name3.setError(null);
                     }
                 }
             }
@@ -102,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    if (!checkEntryno(entry3.getText().toString())) {
-                        Toast.makeText(MainActivity.this, "entry3 is invalid entry number", Toast.LENGTH_LONG).show();
-                        entry3.setError("INVALID ENTRY NUMBER-3");
+                    if (!checkEntryno(entry3.getText().toString().toUpperCase())) {
+                        Toast.makeText(MainActivity.this, "entrynumber-3 is invalid", Toast.LENGTH_LONG).show();
+                        entry3.setError("invalid entry");
                     } else {
                         entry3.setError(null);
                     }
@@ -116,15 +159,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BufferedReader br=null;
         try {
             List<String> list=new ArrayList<String>();
+
             String line;
             br=new BufferedReader(new InputStreamReader(getAssets().open("entrynumbers.txt")));
             while((line=br.readLine())!=null){
-                String[] temp=new String[2];
-                temp=line.split(" ");
+                String[] temp;
+                temp=line.split(" ",2);
                 list.add(temp[0]);
-                list.add(temp[1]);
+                refer.put(temp[0],temp[1]);
             }
-            data=list.toArray(new String[list.size()]);
+            data = list.toArray(new String[list.size()]);
+
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -173,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()){
             case R.id.send:
 
-                if(entry1.getError()==null&&entry2.getError()==null&&entry3.getError()==null){
+                if(entry1.getError()==null&&entry2.getError()==null&&entry3.getError()==null && name1.getError()==null&&name2.getError()==null&&name3.getError()==null ){
                     Intent intent = new Intent(this, confirmation.class);
 
                     intent.putExtra("Team-name", gtext(teamname));
@@ -189,11 +234,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
                 else{
-                    if(entry1.getError()!=null) {
+                    if(!checkEntryno(entry1.getText().toString().toUpperCase())) {
                         entry1.requestFocus();
                     }
                     else {
-                        if (entry2.getError()!=null){
+                        if (!checkEntryno(entry1.getText().toString().toUpperCase())){
                             entry2.requestFocus();
                         }
                         else entry3.requestFocus();

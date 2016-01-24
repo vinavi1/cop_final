@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#c4195fd9"
     android:fillViewport="true">
 
     <LinearLayout
@@ -24,7 +25,7 @@
 
             <TextView
                 android:id="@+id/tTeam"
-                android:textSize="50sp"
+                android:textSize="60sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
