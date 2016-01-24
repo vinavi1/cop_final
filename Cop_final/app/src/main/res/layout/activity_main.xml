@@ -55,7 +55,8 @@
                     android:layout_gravity="center_vertical"
                     android:inputType="textCapCharacters"
                     android:hint="ENTRY NUMBER-1"
-                    android:imeOptions="actionNext"></AutoCompleteTextView>
+                    android:imeOptions="actionNext"
+                    android:autoText="false"></AutoCompleteTextView>
 
             </android.support.design.widget.TextInputLayout>
 

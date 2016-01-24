@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText entry2;
     EditText name3;
     EditText entry3;
-    String[] data;
+    static String[] data;
     String[] datan;
-    HashMap<String,String> refer;
+    static HashMap<String,String> refer;
 
 
     @Override
@@ -53,13 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name3 = (EditText) findViewById(R.id.n3);
         entry3 = (EditText) findViewById(R.id.e3);
 
-
-
         send = (Button) findViewById(R.id.send);
         send.setOnClickListener(this);
 
         Intent intent3 = getIntent();
-
         String check = intent3.getStringExtra("bool");
 
                 if(check.equals("mem2")){
@@ -71,7 +68,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     name3.setVisibility(View.VISIBLE);
                 }
 
-        name1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        View.OnFocusChangeListener entryfocus = null;
+        entryfocus=new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    EditText temp= (EditText) findViewById(v.getId());
+                    if (!CheckEntryNumber.checkEntryno(gtext(temp))) {
+                        Toast.makeText(MainActivity.this, "entrynumber is invalid", Toast.LENGTH_LONG).show();
+                        temp.setError("invalid entry");
+                    } else {
+                        temp.setError(null);
+                        if(v.getId()==entry1.getId()){
+                            if (refer.containsKey(entry1.getText().toString().toUpperCase())){
+                                name1.setText(refer.get(entry1.getText().toString().toUpperCase()));
+                            }
+                        }
+                        if(v.getId()==entry2.getId()){
+                            if (refer.containsKey(entry2.getText().toString().toUpperCase())){
+                                name2.setText(refer.get(entry2.getText().toString().toUpperCase()));
+                            }
+                        }
+                        if(v.getId()==entry3.getId()){
+                            if (refer.containsKey(entry3.getText().toString().toUpperCase())){
+                                name3.setText(refer.get(entry3.getText().toString().toUpperCase()));
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        View.OnFocusChangeListener namefocus = null;
+        namefocus=new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -82,80 +112,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-        });
+        };
 
-        entry1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!checkEntryno(entry1.getText().toString().toUpperCase())) {
-                        Toast.makeText(MainActivity.this, "entrynumber-1 is invalid", Toast.LENGTH_LONG).show();
-                        entry1.setError("invalid entry");
-                    } else {
-                        entry1.setError(null);
-                        if (refer.containsKey(entry1.getText().toString().toUpperCase())){
-                            name1.setText(refer.get(entry1.getText().toString().toUpperCase()));
-                        }
-                    }
-                }
-            }
-        });
-
-        name2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (name2.getText().toString().isEmpty()) {
-                        name2.setError("must not be empty");
-                    } else {
-                        name2.setError(null);
-                    }
-                }
-            }
-        });
-
-        entry2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!checkEntryno(entry2.getText().toString().toUpperCase())) {
-                        Toast.makeText(MainActivity.this, "entrynumber-2 is invalid", Toast.LENGTH_LONG).show();
-                        entry2.setError("invalid entry");
-                    } else {
-                        entry2.setError(null);
-                    }
-                }
-            }
-        });
-
-        name3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (name3.getText().toString().isEmpty()) {
-                        name3.setError("must not be empty");
-                    } else {
-                        name3.setError(null);
-                    }
-                }
-            }
-        });
-
-        entry3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!checkEntryno(entry3.getText().toString().toUpperCase())) {
-                        Toast.makeText(MainActivity.this, "entrynumber-3 is invalid", Toast.LENGTH_LONG).show();
-                        entry3.setError("invalid entry");
-                    } else {
-                        entry3.setError(null);
-                    }
-                }
-            }
-        });
-
-        
+        teamname.setOnFocusChangeListener(namefocus);
+        entry1.setOnFocusChangeListener(entryfocus);
+        name1.setOnFocusChangeListener(namefocus);
+        entry2.setOnFocusChangeListener(entryfocus);
+        name2.setOnFocusChangeListener(namefocus);
+        entry3.setOnFocusChangeListener(entryfocus);
+        name3.setOnFocusChangeListener(namefocus);
 
         BufferedReader br=null;
         try {
@@ -194,26 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         en3.setAdapter(arrayAdapter);
     }
 
-    public static boolean checkEntryno(String entryno) {
-
-        if(entryno.length()!=11){return false;}
-
-        int year = Integer.parseInt(entryno.substring(0, 4));
-        String dept = entryno.substring(4, 6);
-        String spec = entryno.substring(6,7);
-
-        if (year > 2014 || year < 2005) {return false;}
-        if ((dept.matches("CS")&&(spec.matches("1")||spec.matches("5")))){return true;}
-        if((dept.matches("CE")&&(spec.matches("1")))){return true;}
-        if((dept.matches("CH")&&(spec.matches("1")||spec.matches("5")||spec.matches("3")))){return true;}
-        if((dept.matches("BB")&&(spec.matches("1")||spec.matches("5")))){return true;}
-        if((dept.matches("EE")&&(spec.matches("1")||spec.matches("3")||spec.matches("5")))){return true;}
-        if((dept.matches("PH")&&(spec.matches("1")))){return true;}
-        if((dept.matches("MT")&&(spec.matches("1")||spec.matches("5")||spec.matches("6")))){return true;}
-        if((dept.matches("ME")&&(spec.matches("1")||spec.matches("2")))){return true;}
-        return false;
-    }
-
     public static String gtext (EditText v) {
         String data =  v.getText().toString() ;
         return data;
@@ -222,10 +167,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.send:
-                boolean en1val=checkEntryno(gtext(entry1));
-                boolean en3val=checkEntryno(gtext(entry2));
-                boolean en2val=checkEntryno(gtext(entry3));
-                if(en1val&&en2val&&en3val){
+
+                boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
+                boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
+                boolean en3val=CheckEntryNumber.checkEntryno(gtext(entry3));
+
+                if(!(teamname.getText().toString().isEmpty())&&en1val&&en2val&&en3val&&!(name1.getText().toString().isEmpty())&&!(name1.getText().toString().isEmpty())&&!(name1.getText().toString().isEmpty())){
                     Intent intent = new Intent(this, confirmation.class);
 
                     intent.putExtra("Team-name", gtext(teamname));
@@ -245,13 +192,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         entry1.requestFocus();
                     }
                     else {
-                        if (en2val){
+                        if(!en2val){
                             entry2.requestFocus();
                         }
-                        else entry3.requestFocus();
+                        else{
+                            entry3.requestFocus();
+                        }
                     }
                 }
         }
     }
-
 }
