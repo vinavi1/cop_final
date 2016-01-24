@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+
+// final activity which corresponds to the details entered 
 public class confirmation extends Activity implements View.OnClickListener{
 
     RequestQueue requestQueue;

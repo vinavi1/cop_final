@@ -1,3 +1,4 @@
+
 package com.example.android.cop_final;
 
 import android.content.Intent;
@@ -25,6 +26,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+    // necessary objects are declared
     Button send;
     EditText teamname;
     EditText name1;
@@ -33,18 +36,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText entry2;
     EditText name3;
     EditText entry3;
+    String check;
+
+    //data stores the entry-numbers read from .txt file externally
     static String[] data;
-    String[] datan;
+
+    //refer maps the entry-numbers with the respective names
     static HashMap<String,String> refer;
 
-
+    //these are done on creation of MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //views and other objects are initialized
         refer = new HashMap<>();
-
         teamname = (EditText) findViewById(R.id.Team);
         name1 = (EditText) findViewById(R.id.n1);
         entry1 = (EditText) findViewById(R.id.e1);
@@ -52,21 +59,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entry2 = (EditText) findViewById(R.id.e2);
         name3 = (EditText) findViewById(R.id.n3);
         entry3 = (EditText) findViewById(R.id.e3);
-
         send = (Button) findViewById(R.id.send);
+
+        //keeps waiting until the send button is clicked
         send.setOnClickListener(this);
 
+        //accepts the data sent to this activity from Members Activity
         Intent intent3 = getIntent();
-        String check = intent3.getStringExtra("bool");
+        check = intent3.getStringExtra("bool");
 
-                if(check.equals("mem2")){
-                    entry3.setVisibility(View.GONE);
-                    name3.setVisibility(View.GONE);
-                }
-                else{
-                    entry3.setVisibility(View.VISIBLE);
-                    name3.setVisibility(View.VISIBLE);
-                }
+        //checks the value of bool and decides visibility of entry3
+        if(check.equals("mem2")){
+            entry3.setVisibility(View.GONE);
+            name3.setVisibility(View.GONE);
+        }
+        else{
+            entry3.setVisibility(View.VISIBLE);
+            name3.setVisibility(View.VISIBLE);
+        }
 
 
         View.OnFocusChangeListener entryfocus = null;
@@ -76,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!hasFocus) {
                     EditText temp= (EditText) findViewById(v.getId());
                     if (!CheckEntryNumber.checkEntryno(gtext(temp))) {
-                        Toast.makeText(MainActivity.this, "entrynumber is invalid", Toast.LENGTH_LONG).show();
                         temp.setError("invalid entry");
                     } else {
                         temp.setError(null);
@@ -168,35 +177,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()){
             case R.id.send:
 
-                boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
-                boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
-                boolean en3val=CheckEntryNumber.checkEntryno(gtext(entry3));
 
-                if(!(teamname.getText().toString().isEmpty())&&en1val&&en2val&&en3val&&!(name1.getText().toString().isEmpty())&&!(name1.getText().toString().isEmpty())&&!(name1.getText().toString().isEmpty())){
-                    Intent intent = new Intent(this, confirmation.class);
 
-                    intent.putExtra("Team-name", gtext(teamname));
-                    intent.putExtra("user1", gtext(name1));
-                    intent.putExtra("user2", gtext(name2));
-                    intent.putExtra("user3", gtext(name3));
+                if(!check.equals("mem2")) {
+                    boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
+                    boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
+                    boolean en3val=CheckEntryNumber.checkEntryno(gtext(entry3));
 
-                    intent.putExtra("entry1", gtext(entry1));
-                    intent.putExtra("entry2", gtext(entry2));
-                    intent.putExtra("entry3", gtext(entry3));
-                    startActivity(intent);
+                    if(!(teamname.getText().toString().isEmpty())&&en1val&&en2val&&en3val&&!(name1.getText().toString().isEmpty())&&!(name2.getText().toString().isEmpty())&&!(name3.getText().toString().isEmpty())){
+                        Intent intent = new Intent(this, confirmation.class);
 
-                    break;
-                }
-                else{
-                    if(!en1val) {
-                        entry1.requestFocus();
+                        intent.putExtra("Team-name", gtext(teamname));
+                        intent.putExtra("user1", gtext(name1));
+                        intent.putExtra("user2", gtext(name2));
+                        intent.putExtra("user3", gtext(name3));
+
+                        intent.putExtra("entry1", gtext(entry1));
+                        intent.putExtra("entry2", gtext(entry2));
+                        intent.putExtra("entry3", gtext(entry3));
+                        startActivity(intent);
+
+                        break;
                     }
-                    else {
-                        if(!en2val){
-                            entry2.requestFocus();
+                    else{
+                        if(!en1val) {
+                            entry1.requestFocus();
                         }
-                        else{
-                            entry3.requestFocus();
+                        else {
+                            if(!en2val){
+                                entry2.requestFocus();
+                            }
+                            else{
+                                entry3.requestFocus();
+                            }
+                        }
+                    }
+                }
+                else {
+                    boolean en1val=CheckEntryNumber.checkEntryno(gtext(entry1));
+                    boolean en2val=CheckEntryNumber.checkEntryno(gtext(entry2));
+
+                    if(!(teamname.getText().toString().isEmpty())&&en1val&&en2val&&!(name1.getText().toString().isEmpty())&&!(name2.getText().toString().isEmpty())){
+                        Intent intent = new Intent(this, confirmation.class);
+
+                        intent.putExtra("Team-name", gtext(teamname));
+                        intent.putExtra("user1", gtext(name1));
+                        intent.putExtra("user2", gtext(name2));
+                        intent.putExtra("user3", (String) null);
+
+                        intent.putExtra("entry1", gtext(entry1));
+                        intent.putExtra("entry2", gtext(entry2));
+                        intent.putExtra("entry3", (String) null);
+                        startActivity(intent);
+
+                        break;
+                    }
+                    else{
+                        if(!en1val) {
+                            entry1.requestFocus();
+                        }
+                        else {
+                            if(!en2val){
+                                entry2.requestFocus();
+                            }
+                            else{
+                                entry3.requestFocus();
+                            }
                         }
                     }
                 }
